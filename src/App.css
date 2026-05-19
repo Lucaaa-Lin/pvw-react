@@ -313,8 +313,8 @@ a {
     flex-direction: column;
     align-items: start;
     gap: 40px;
-    margin-top: 40px;
-    margin-left: 40px;
+    margin-top: 20px;
+    margin-left: 20px;
   }
   .mobile-social-section {
     display: flex;
@@ -536,12 +536,16 @@ a {
   .product-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
   }
   .filter-bar {
-  display: flex;
-  gap:20px;
-  justify-content: space-between;
-  padding-top: 10px;
+    display: flex;
+    gap:12px;
+    justify-content: space-between;
+    padding-top: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
   }
   .sort-select,
   .filter-toggle-btn {
@@ -582,7 +586,7 @@ a {
   }
   /* ----- product detail------ */
   .product-detail-page {
-    padding: 10px 20px !important;
+    padding: 5px !important;
   }
   .product-detail-layout {
     display: flex !important;
