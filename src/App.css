@@ -606,7 +606,6 @@ a {
   .product-main-image {
     min-width: 100%;
     display: block;
-
     object-fit: cover;
   }
   .main-image-wrapper:hover .product-main-image {
@@ -1113,9 +1112,6 @@ a {
 }
 
 /* ------------ease pop in/out---------- */
-.product-main-image {
-  animation: imageFade 0.28s ease;
-}
 
 @keyframes imageFade {
   from {
@@ -1139,7 +1135,7 @@ a {
   }
 }
 
-@keyframes fadeIn {
+/* @keyframes fadeIn {
   from {
     opacity: 0;
   }
@@ -1147,4 +1143,4 @@ a {
   to {
     opacity: 1;
   }
-}
+} */
