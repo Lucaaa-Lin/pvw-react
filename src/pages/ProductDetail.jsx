@@ -12,6 +12,7 @@ function ProductDetail() {
   const [cooldown, setCooldown] = useState(0)
   const [selectedIndex, setSelectedIndex] = useState(0)
   const [isZoomOpen, setIsZoomOpen] = useState(false)
+  const [touchStartX, setTouchStartX] = useState(null)
 
   useEffect(() => {
     async function fetchProduct() {
@@ -111,12 +112,35 @@ function ProductDetail() {
         setSelectedIndex(newIndex)
         setSelectedImage(product.images[newIndex])
     }
+
+    function handleTouchStart(e) {
+    setTouchStartX(e.changedTouches[0].clientX)
+    }
+
+    function handleTouchEnd(e) {
+    if (touchStartX === null) return
+
+    const touchEndX = e.changedTouches[0].clientX
+    const diff = touchStartX - touchEndX
+
+    if (diff > 50) {
+        showNextImage()
+    }
+
+    if (diff < -50) {
+        showPrevImage()
+    }
+
+    setTouchStartX(null)
+    }
   return (
     <main className="product-detail-page">
         <div className="product-detail-layout">
         {/* 左边：图片区域 */}
             <section className="product-detail-left">
-                <div className="main-image-wrapper">
+                <div className="main-image-wrapper"
+                    onTouchStart={handleTouchStart}
+                    onTouchEnd={handleTouchEnd}>
                     {selectedImage && (
                     <img
                         className="product-main-image"

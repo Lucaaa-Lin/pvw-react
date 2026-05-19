@@ -199,15 +199,13 @@ a {
 
 @media (max-width: 768px) {
   .header {
-    position: relative;
-
+    position: sticky;
     display: flex;
     align-items: center;
     justify-content: center;
-
     height: 88px;
-
     padding: 0 20px;
+    padding-top: 10px;
   }
 
   .nav-left,
@@ -260,6 +258,7 @@ a {
 
   .mobile-menu-close {
     align-self: flex-end;
+    color: black;
     border: none;
     background: none;
     font-size: 34px;
@@ -286,7 +285,6 @@ a {
   .mobile-search button {
     width: 46px;
     height: 46px;
-
     border: none;
     background: transparent;
 
@@ -394,6 +392,9 @@ a {
 
 .sort-select,
 .filter-toggle-btn {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
   width: 140px;
   height: 45px;
   color: #111;
@@ -591,6 +592,9 @@ a {
     transform: scale(1.02);
     transform: none !important;
   }
+  .main-image-wrapper {
+    touch-action: pan-y;
+  }
   .product-detail-right {
     padding-right: 0px !important;
   }
@@ -621,6 +625,7 @@ a {
   }
   .filter-close-btn {
     align-self: flex-end;
+    color: black;
     border: none;
     background: none;
     font-size: 34px;
@@ -640,6 +645,7 @@ a {
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
   }
+
 
   .filter-panel {
     z-index: 9999;
