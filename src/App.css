@@ -217,6 +217,7 @@ a {
 
   .mobile-menu-btn {
     position: absolute;
+    color: black;
     right: 30px;
     display: block;
     justify-self: start;
@@ -394,6 +395,7 @@ a {
 .filter-toggle-btn {
   width: 140px;
   height: 45px;
+  color: #111;
   border: 1px solid #111;
   background: white;
   font-size: 14px;
@@ -658,6 +660,7 @@ a {
   margin-bottom: 40px;
   margin-top: 20px;
   padding: 14px 34px;
+  color: black;
   background: white;
   border: 1px solid black;
   cursor: pointer;
@@ -883,6 +886,7 @@ a {
 
 .purchase-btn {
   padding: 14px 34px;
+  color:#111;
   background: white;
   border: 1px solid black;
   cursor: pointer;
