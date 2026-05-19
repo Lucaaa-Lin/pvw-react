@@ -246,7 +246,7 @@ a {
     position: fixed;
     top: 0;
     right: 0;
-    width: 82%;
+    width: 70%;
     max-width: 360px;
     height: 100vh;
     background: white;
@@ -607,29 +607,38 @@ a {
     top: 0;
     right: 0;
     left: auto;
-
-    width: 82%;
+    width: 70%;
     max-width: 360px;
     height: 100vh;
-
     padding: 32px 28px;
-
     background: white;
     box-shadow: -8px 0 30px rgba(0, 0, 0, 0.16);
-
     z-index: 9999;
-
     display: flex;
     flex-direction: column;
     gap: 32px;
-
     overflow-y: auto;
   }
+  .filter-close-btn {
+    align-self: flex-end;
+    border: none;
+    background: none;
+    font-size: 34px;
+    line-height: 1;
+    cursor: pointer;
+    margin-bottom: 8px;
+  }
+
   .filter-overlay {
     position: fixed;
     inset: 0;
     background: rgba(0, 0, 0, 0.35);
     z-index: 9998;
+  }
+  .mobile-menu,
+  .filter-panel {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
   .filter-panel {
@@ -641,18 +650,16 @@ a {
   }
 
   .filter-column h3 {
-    font-size: 20px;
-    margin-bottom: 16px;
+    font-size: 16px;
+    margin-bottom: 20px;
     color: #555;
   }
 
   .filter-column label {
     display: flex;
     align-items: center;
-    gap: 12px;
-
-    font-size: 17px;
-    margin-bottom: 14px;
+    font-size: 14px;
+    margin-bottom: 4px;
   }
 
   .filter-column input {

@@ -35,42 +35,53 @@ function Home() {
     fetchProducts()
   }, [])
   useEffect(() => {
+    function handleClickOutside(event) {
 
-  function handleClickOutside(event) {
+        if (
+          filterRef.current &&
+          !filterRef.current.contains(event.target)
+        ) {
+          setIsFilterOpen(false)
+        }
 
-      if (
-        filterRef.current &&
-        !filterRef.current.contains(event.target)
-      ) {
-        setIsFilterOpen(false)
       }
 
-    }
-
-    document.addEventListener(
-      'mousedown',
-      handleClickOutside
-    )
-
-    return () => {
-      document.removeEventListener(
+      document.addEventListener(
         'mousedown',
         handleClickOutside
       )
+
+      return () => {
+        document.removeEventListener(
+          'mousedown',
+          handleClickOutside
+        )
+      }
+
+    }, [])
+
+    function toggleFilter(value, selected, setSelected) {
+    if (selected.includes(value)) {
+      setSelected(selected.filter((item) => item !== value))
+    } else {
+      setSelected([...selected, value])
     }
 
-  }, [])
-
-  function toggleFilter(value, selected, setSelected) {
-  if (selected.includes(value)) {
-    setSelected(selected.filter((item) => item !== value))
-  } else {
-    setSelected([...selected, value])
+    setVisibleCount(12)
+    setIsFilterOpen(false)
   }
+  useEffect(() => {
+    if (isFilterOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
 
-  setVisibleCount(12)
-  setIsFilterOpen(false)
-}
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [isFilterOpen])
+
 
 
   const genders = ["Men's", "Women's", 'Unisex']
@@ -174,6 +185,13 @@ function Home() {
               />
 
               <div className="filter-panel">
+                <button
+                  type="button"
+                  className="filter-close-btn"
+                  onClick={() => setIsFilterOpen(false)}
+                >
+                  ×
+                </button>
                 <div className="filter-column">
                   <h3>Gender</h3>
 
