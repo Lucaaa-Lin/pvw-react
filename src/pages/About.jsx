@@ -4,45 +4,47 @@ import about2 from '../assets/about2.jpg'
 function About() {
   return (
     <main className="about-page">
-      <section className="about-intro">
-        <div className="about-text">
-          <h1 className='mobile-about'>About us</h1>
-          <div className='about-intro-top'>
-            <div className='intro-top-left'>
-              <p>
-                At Precision Vintage Watches, we are driven by a passion for the
-                history and unique design sensibilities of mid-century watchmaking.
-                We specialise in curating a collection from the 1950s to the 1980s,
-                featuring Omega, Longines, IWC, Bulova, Rado, Seiko and more.
-              </p>
+      <div className='page-container'>
+        <section className="about-intro">
+          <div className="about-text">
+            <h1 className='mobile-about'>About us</h1>
+            <div className='about-intro-top'>
+              <div className='intro-top-left'>
+                <p>
+                  At Precision Vintage Watches, we are driven by a passion for the
+                  history and unique design sensibilities of mid-century watchmaking.
+                  We specialise in curating a collection from the 1950s to the 1980s,
+                  featuring Omega, Longines, IWC, Bulova, Rado, Seiko and more.
+                </p>
 
-              <p>
-                Based in Sydney, Australia, and shipping to enthusiasts worldwide,
-                we take pride in our exceptional customer reviews and dedicated
-                service. We will help you find the perfect vintage watch that
-                reflects your personal style and appreciation for classic design and
-                craftsmanship.
-              </p>
+                <p>
+                  Based in Sydney, Australia, and shipping to enthusiasts worldwide,
+                  we take pride in our exceptional customer reviews and dedicated
+                  service. We will help you find the perfect vintage watch that
+                  reflects your personal style and appreciation for classic design and
+                  craftsmanship.
+                </p>
 
+              </div>
+              <div className='intro-top-right'>
+                <img
+                  src={about2}
+                  alt="Vintage watch detail"
+                  className="about-side-image"
+                />
+              </div>
+              
             </div>
-            <div className='intro-top-right'>
+            <div className='about-intro-bottom'>
               <img
-                src={about2}
-                alt="Vintage watch detail"
-                className="about-side-image"
+                src={about1}
+                alt="Vintage watch collection"
+                className="about-wide-image"
               />
             </div>
-            
           </div>
-          <div className='about-intro-bottom'>
-            <img
-              src={about1}
-              alt="Vintage watch collection"
-              className="about-wide-image"
-            />
-          </div>
-        </div>
-      </section>
+        </section>
+      </div>
     </main>
   )
 }

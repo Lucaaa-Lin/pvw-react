@@ -154,156 +154,157 @@ function Home() {
 
 
   return (
-    <main>
-      <p className="allwatches">All Watches</p>
+    <main className='home-page'>
+      <div className='page-container'>
+        <p className="allwatches">All Watches</p>
+        <div className="filter-bar">
+          <select
+              className="sort-select"
+              value={sortOption}
+              onChange={(e) => setSortOption(e.target.value)}
+            >
+            <option value="newest">Newest to Oldest</option>
+            <option value="oldest">Oldest to Newest</option>
+            <option value="price-low">Price: Low to High</option>
+            <option value="price-high">Price: High to Low</option>
+          </select>
+          <div className="filter-dropdown" ref={filterRef}>
+            <button
+              type="button"
+              className="filter-toggle-btn"
+              onClick={() => setIsFilterOpen(!isFilterOpen)}
+            >
+              Filter
+            </button>
 
-      <div className="filter-bar">
-         <select
-            className="sort-select"
-            value={sortOption}
-            onChange={(e) => setSortOption(e.target.value)}
-          >
-          <option value="newest">Newest to Oldest</option>
-          <option value="oldest">Oldest to Newest</option>
-          <option value="price-low">Price: Low to High</option>
-          <option value="price-high">Price: High to Low</option>
-        </select>
-        <div className="filter-dropdown" ref={filterRef}>
-          <button
-            type="button"
-            className="filter-toggle-btn"
-            onClick={() => setIsFilterOpen(!isFilterOpen)}
-          >
-            Filter <span>{isFilterOpen ? '⌃' : '⌄'}</span>
-          </button>
-
-          {isFilterOpen && (
-            <>
-              <div
-                className="filter-overlay"
-                onClick={() => setIsFilterOpen(false)}
-              />
-
-              <div className="filter-panel">
-                <button
-                  type="button"
-                  className="filter-close-btn"
+            {isFilterOpen && (
+              <>
+                <div
+                  className="filter-overlay"
                   onClick={() => setIsFilterOpen(false)}
-                >
-                  ×
-                </button>
-                <div className="filter-column">
-                  <h3>Gender</h3>
-
-                  {genders.map((gender) => (
-                    <label key={gender}>
-                      <input
-                        type="checkbox"
-                        checked={selectedGenders.includes(gender)}
-                        onChange={() =>
-                          toggleFilter(
-                            gender,
-                            selectedGenders,
-                            setSelectedGenders
-                          )
-                        }
-                      />
-                      {gender}
-                    </label>
-                  ))}
-                </div>
-
-                <div className="filter-column">
-                  <h3>Brand</h3>
-
-                  {brands.map((brand) => (
-                    <label key={brand}>
-                      <input
-                        type="checkbox"
-                        checked={selectedBrands.includes(brand)}
-                        onChange={() =>
-                          toggleFilter(
-                            brand,
-                            selectedBrands,
-                            setSelectedBrands
-                          )
-                        }
-                      />
-                      {brand}
-                    </label>
-                  ))}
-                </div>
-
-                <div className="filter-column">
-                  <h3>Movement</h3>
-
-                  {movements.map((movement) => (
-                    <label key={movement}>
-                      <input
-                        type="checkbox"
-                        checked={selectedMovements.includes(movement)}
-                        onChange={() =>
-                          toggleFilter(
-                            movement,
-                            selectedMovements,
-                            setSelectedMovements
-                          )
-                        }
-                      />
-                      {movement}
-                    </label>
-                  ))}
-                </div>
-
-                <button
-                  type="button"
-                  className="clear-filter-btn"
-                  onClick={() => {
-                    setSelectedBrands([])
-                    setSelectedGenders([])
-                    setSelectedMovements([])
-                    setVisibleCount(12)
-                    setIsFilterOpen(false)
-                  }}
-                >
-                  Clear Filters
-                </button>
-              </div>
-            </>
-          )}
-        </div>
-       
-      </div>
-
-        {filteredProducts.length === 0 ? (
-          <div className="empty-wrapper">
-            <div className="empty-state">
-              <h2>No watches found</h2>
-              <p>Try adjusting your filters or search terms.</p>
-            </div>
-          </div>
-        ) : (
-          <div className="product-grid">
-            {filteredProducts
-              .slice(0, visibleCount)
-              .map((product) => (
-                <ProductCard
-                  key={product._id}
-                  product={product}
                 />
-            ))}
+
+                <div className="filter-panel">
+                  <button
+                    type="button"
+                    className="filter-close-btn"
+                    onClick={() => setIsFilterOpen(false)}
+                  >
+                    ×
+                  </button>
+                  <div className="filter-column">
+                    <h3>Gender</h3>
+
+                    {genders.map((gender) => (
+                      <label key={gender}>
+                        <input
+                          type="checkbox"
+                          checked={selectedGenders.includes(gender)}
+                          onChange={() =>
+                            toggleFilter(
+                              gender,
+                              selectedGenders,
+                              setSelectedGenders
+                            )
+                          }
+                        />
+                        {gender}
+                      </label>
+                    ))}
+                  </div>
+
+                  <div className="filter-column">
+                    <h3>Brand</h3>
+
+                    {brands.map((brand) => (
+                      <label key={brand}>
+                        <input
+                          type="checkbox"
+                          checked={selectedBrands.includes(brand)}
+                          onChange={() =>
+                            toggleFilter(
+                              brand,
+                              selectedBrands,
+                              setSelectedBrands
+                            )
+                          }
+                        />
+                        {brand}
+                      </label>
+                    ))}
+                  </div>
+
+                  <div className="filter-column">
+                    <h3>Movement</h3>
+
+                    {movements.map((movement) => (
+                      <label key={movement}>
+                        <input
+                          type="checkbox"
+                          checked={selectedMovements.includes(movement)}
+                          onChange={() =>
+                            toggleFilter(
+                              movement,
+                              selectedMovements,
+                              setSelectedMovements
+                            )
+                          }
+                        />
+                        {movement}
+                      </label>
+                    ))}
+                  </div>
+
+                  <button
+                    type="button"
+                    className="clear-filter-btn"
+                    onClick={() => {
+                      setSelectedBrands([])
+                      setSelectedGenders([])
+                      setSelectedMovements([])
+                      setVisibleCount(12)
+                      setIsFilterOpen(false)
+                    }}
+                  >
+                    Clear Filters
+                  </button>
+                </div>
+              </>
+            )}
           </div>
+        
+        </div>
 
+          {filteredProducts.length === 0 ? (
+            <div className="empty-wrapper">
+              <div className="empty-state">
+                <h2>No watches found</h2>
+                <p>Try adjusting your filters or search terms.</p>
+              </div>
+            </div>
+          ) : (
+            <div className="product-grid">
+              {filteredProducts
+                .slice(0, visibleCount)
+                .map((product) => (
+                  <ProductCard
+                    key={product._id}
+                    product={product}
+                  />
+              ))}
+            </div>
+
+          )}
+
+        {visibleCount < filteredProducts.length && (
+          <button
+            className="load-more-btn"
+            onClick={() => setVisibleCount(visibleCount + 12)}
+          >
+            Load More
+          </button>
         )}
-
-      {visibleCount < filteredProducts.length && (
-        <button
-          className="load-more-btn"
-          onClick={() => setVisibleCount(visibleCount + 12)}
-        >
-          Load More
-        </button>
-      )}
+      </div>
     </main>
   )
 }

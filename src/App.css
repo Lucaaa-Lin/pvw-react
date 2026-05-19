@@ -1,33 +1,49 @@
+/* 1. 彻底初始化所有元素的边距，防止任何标签自带白边 */
 * {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
-}
-.site {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-.site > main {
-  flex: 1;
-}
-main {
-  flex: 1;
 }
 
 html,
-body {
-  min-height: 100%;
+body,
+#root { /* React 的根节点 #root 必须也是 100% 宽 */
+  width: 100%;
+  min-height: 100vh;
 }
 
 body {
-  margin: 0;
   font-family: 'EB Garamond', sans-serif;
   color: #111;
   background: #fff;
 }
 
+/* 2. 确保 .site 容器全宽，并采用弹性布局 */
+.site {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 3. 页面主体部分（Routes 切换区域）自动撑满剩余高度 */
+.site > main, main {
+  flex: 1;
+  width: 100%; /* 确保主体外壳也是 100% 宽 */
+}
+
 a {
   color: inherit;
   text-decoration: none;
+}
+
+/* 4. 【核心分工】只有这个类名去限宽，Header 和 Footer 绝对不能用这个类名 */
+.page-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-left: 24px;
+  padding-right: 24px;
 }
 
 .header {
@@ -387,7 +403,6 @@ a {
   max-width: auto;
   margin-left: 20px;
   margin-right: 20px;
-
 }
 
 .sort-select,
@@ -403,8 +418,9 @@ a {
   font-size: 14px;
   cursor: pointer;
   align-items:center;
-  text-align: left;
+  text-align: center;
 }
+
 
 .sort-select:hover {
   color: white;
@@ -413,11 +429,6 @@ a {
 .filter-toggle-btn:hover {
   color: white;
   background-color: #111;
-}
-.filter-toggle-btn {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
 }
 
 .filter-panel {
@@ -528,7 +539,7 @@ a {
   }
   .filter-bar {
   display: flex;
-  gap:12px;
+  gap:20px;
   justify-content: space-between;
   padding-top: 10px;
   }
@@ -543,7 +554,6 @@ a {
     flex: 1;
   }
   /* ------about-------- */
-
   .about-intro-top {
     /* 强行打破 Grid 布局，变成普通的上下堆叠块级布局 */
     display: block !important; 
@@ -688,11 +698,21 @@ a {
 
     font-size: 16px;
   }
+  /* -----smooth pop---- */
+  .mobile-menu,
+  .filter-panel {
+    animation: slideInRight 0.28s ease forwards;
+  }
+
+  .mobile-menu-overlay,
+  .filter-overlay {
+    animation: fadeIn 0.25s ease forwards;
+  }
 }
 
 .productcard-info {
   background: #f2f2f2;
-  padding: 5px;
+  padding: 3px;
   font-size: 14px;
   text-align: center;
   min-height: 130px;
@@ -700,7 +720,7 @@ a {
   flex-direction: column;
 }
 .productcard-brand {
-  margin-top: 5px;
+  margin: 15px;
   font-size: 20px;
   font-weight: 500;
 }
@@ -764,7 +784,6 @@ a {
 }
 /* ----------- about page --------- */
 .about-page {
-  max-width: 950px;
   margin: 0 auto;
   padding: 56px 80px 80px;
 }
@@ -1079,4 +1098,41 @@ a {
 
 .success-message {
   color: #2f7d32;
+}
+
+/* ------------ease pop in/out---------- */
+.product-main-image {
+  animation: imageFade 0.28s ease;
+}
+
+@keyframes imageFade {
+  from {
+    opacity: 0.65;
+    transform: scale(1.01);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }

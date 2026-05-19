@@ -135,156 +135,159 @@ function ProductDetail() {
     }
   return (
     <main className="product-detail-page">
-        <div className="product-detail-layout">
-        {/* 左边：图片区域 */}
-            <section className="product-detail-left">
-                <div className="main-image-wrapper"
-                    onTouchStart={handleTouchStart}
-                    onTouchEnd={handleTouchEnd}>
-                    {selectedImage && (
-                    <img
-                        className="product-main-image"
-                        src={urlFor(selectedImage).width(900).url()}
-                        alt={product.name}
-                        onClick={() => setIsZoomOpen(true)}
-                    />
-                    )}
-                    <button className="image-arrow left" onClick={showPrevImage}>
-                        ‹
-                    </button>
+        <div className='page-container'>
+            <div className="product-detail-layout">
+            {/* 左边：图片区域 */}
+                <section className="product-detail-left">
+                    <div className="main-image-wrapper"
+                        onTouchStart={handleTouchStart}
+                        onTouchEnd={handleTouchEnd}>
+                        {selectedImage && (
+                        <img
+                            key={selectedIndex}
+                            className="product-main-image"
+                            src={urlFor(selectedImage).width(900).url()}
+                            alt={product.name}
+                            onClick={() => setIsZoomOpen(true)}
+                        />
+                        )}
+                        <button className="image-arrow left" onClick={showPrevImage}>
+                            ‹
+                        </button>
 
-                    <button className="image-arrow right" onClick={showNextImage}>
-                        ›
-                    </button>
-                </div>
+                        <button className="image-arrow right" onClick={showNextImage}>
+                            ›
+                        </button>
+                    </div>
 
-                <div className="product-gallery">
-                {product.images?.map((image, index) => (
+                    <div className="product-gallery">
+                    {product.images?.map((image, index) => (
+                        <button
+                        key={index}
+                        type="button"
+                        onClick={() => {
+                            setSelectedImage(image)
+                            setSelectedIndex(index)
+                        }}
+                        className={`gallery-button ${
+                                selectedIndex === index ? 'active' : ''
+                            }`}
+                        >
+                        <img
+                            src={urlFor(image).width(160).url()}
+                            alt={`${product.name} ${index + 1}`}
+                        />
+                        </button>
+                    ))}
+                    </div>
+                </section>
+
+                {/* 右边：文字区域 */}
+                <section className="product-detail-right">
+                    <div className="product-title-group">
+                        <h1>{product.brand}</h1>
+                        <h2>{product.name}</h2>
+                    </div>
+
+                    <div className="product-price">
+                    $ {product.price?.toLocaleString()} AUD
+                    </div>
+
                     <button
-                    key={index}
                     type="button"
-                    onClick={() => {
-                        setSelectedImage(image)
-                        setSelectedIndex(index)
-                    }}
-                    className={`gallery-button ${
-                            selectedIndex === index ? 'active' : ''
-                        }`}
+                    className="purchase-btn"
+                    onClick={() => setIsModalOpen(true)}
                     >
-                    <img
-                        src={urlFor(image).width(160).url()}
-                        alt={`${product.name} ${index + 1}`}
-                    />
+                    Message to Purchase
                     </button>
-                ))}
-                </div>
-            </section>
 
-            {/* 右边：文字区域 */}
-            <section className="product-detail-right">
-                <div className="product-title-group">
-                    <h1>{product.brand}</h1>
-                    <h2>{product.name}</h2>
-                </div>
+                    <h3>Description</h3>
+                    <p className="product-description">{product.description}</p>
 
-                <div className="product-price">
-                $ {product.price?.toLocaleString()} AUD
-                </div>
+                    <h3>Delivery</h3>
+                    <p className="product-description">We ship worldwide via Australia Post with parcel tracking.</p>
 
-                <button
-                type="button"
-                className="purchase-btn"
-                onClick={() => setIsModalOpen(true)}
-                >
-                Message to Purchase
-                </button>
+                    <h3>Payment</h3>
+                    <p className="product-description">We accept payment by bank transfer or cash on collection from Granville, NSW.</p>
+                </section>
 
-                <h3>Description</h3>
-                <p className="product-description">{product.description}</p>
-
-                <h3>Delivery</h3>
-                <p className="product-description">We ship worldwide via Australia Post with parcel tracking.</p>
-
-                <h3>Payment</h3>
-                <p className="product-description">We accept payment by bank transfer or cash on collection from Granville, NSW.</p>
-            </section>
-
-        </div>
-
-        {isModalOpen && (
-        <div
-            className="modal-overlay"
-            onClick={() => setIsModalOpen(false)}
-            >
-            <div
-                className="modal"
-                onClick={(e) => e.stopPropagation()}
-                >
-            <button
-                type="button"
-                className="modal-close"
-                onClick={() => setIsModalOpen(false)}
-            >
-                X
-            </button>
-
-            <form onSubmit={handleSubmit}>
-                <label>Subject</label>
-                <input
-                type="text"
-                name="subject"
-                value={`Inquiry - ${product.brand} ${product.name}`}
-                readOnly
-                />
-
-                <input
-                type="hidden"
-                name="type"
-                value={`${product.brand} ${product.name}`}
-                />
-
-                <label>Name</label>
-                <input type="text" name="name" required />
-
-                <label>Email Address</label>
-                <input type="email" name="email" required />
-
-                <label>Message</label>
-                <textarea
-                name="message"
-                defaultValue="Hi, I'm interested in this watch."
-                required
-                />
-
-                {sendSuccess && (
-                <p className="success-message">
-                    Message sent successfully.
-                </p>
-                )}
-
-                <button type="submit" disabled={isSubmitting || cooldown > 0}>
-                {isSubmitting
-                    ? 'Sending...'
-                    : cooldown > 0
-                    ? `Send again in ${cooldown}s`
-                    : 'Send Message'}
-                </button>
-            </form>
             </div>
+
+            {isModalOpen && (
+            <div
+                className="modal-overlay"
+                onClick={() => setIsModalOpen(false)}
+                >
+                <div
+                    className="modal"
+                    onClick={(e) => e.stopPropagation()}
+                    >
+                <button
+                    type="button"
+                    className="modal-close"
+                    onClick={() => setIsModalOpen(false)}
+                >
+                    X
+                </button>
+
+                <form onSubmit={handleSubmit}>
+                    <label>Subject</label>
+                    <input
+                    type="text"
+                    name="subject"
+                    value={`Inquiry - ${product.brand} ${product.name}`}
+                    readOnly
+                    />
+
+                    <input
+                    type="hidden"
+                    name="type"
+                    value={`${product.brand} ${product.name}`}
+                    />
+
+                    <label>Name</label>
+                    <input type="text" name="name" required />
+
+                    <label>Email Address</label>
+                    <input type="email" name="email" required />
+
+                    <label>Message</label>
+                    <textarea
+                    name="message"
+                    defaultValue="Hi, I'm interested in this watch."
+                    required
+                    />
+
+                    {sendSuccess && (
+                    <p className="success-message">
+                        Message sent successfully.
+                    </p>
+                    )}
+
+                    <button type="submit" disabled={isSubmitting || cooldown > 0}>
+                    {isSubmitting
+                        ? 'Sending...'
+                        : cooldown > 0
+                        ? `Send again in ${cooldown}s`
+                        : 'Send Message'}
+                    </button>
+                </form>
+                </div>
+            </div>
+            )}
+            {isZoomOpen && (
+            <div
+                className="zoom-overlay"
+                onClick={() => setIsZoomOpen(false)}
+            >
+                <img
+                className="zoom-image"
+                src={urlFor(selectedImage).width(1600).url()}
+                alt={product.name}
+                />
+            </div>
+            )}
         </div>
-        )}
-        {isZoomOpen && (
-        <div
-            className="zoom-overlay"
-            onClick={() => setIsZoomOpen(false)}
-        >
-            <img
-            className="zoom-image"
-            src={urlFor(selectedImage).width(1600).url()}
-            alt={product.name}
-            />
-        </div>
-        )}
     </main>
     )
 }
