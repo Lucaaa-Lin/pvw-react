@@ -558,6 +558,10 @@ a {
     flex: 1;
   }
   /* ------about-------- */
+  .about-page {
+  margin: 0 auto;
+  padding: 10px !important;
+}
   .about-intro-top {
     /* 强行打破 Grid 布局，变成普通的上下堆叠块级布局 */
     display: block !important; 
@@ -593,21 +597,25 @@ a {
     flex-direction: column !important;
     gap: 10px !important;
   }
+  .main-image-track {
+    display: flex;
+
+    transition: transform 0.35s ease;
+  }
+
   .product-main-image {
-    width: 100%;
-    height: 100%;
-    padding-top: 10px;
-    object-fit: cover;
+    min-width: 100%;
     display: block;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-    border-radius: 2px;
+
+    object-fit: cover;
   }
   .main-image-wrapper:hover .product-main-image {
     transform: scale(1.02);
     transform: none !important;
   }
   .main-image-wrapper {
-    touch-action: pan-y;
+    position: relative;
+    overflow: hidden;
   }
   .product-detail-right {
     padding-right: 0px !important;
@@ -719,7 +727,7 @@ a {
   padding: 3px;
   font-size: 14px;
   text-align: center;
-  min-height: 140px;
+  min-height: 150px;
   display: flex;
   flex-direction: column;
 }

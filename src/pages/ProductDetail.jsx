@@ -142,15 +142,25 @@ function ProductDetail() {
                     <div className="main-image-wrapper"
                         onTouchStart={handleTouchStart}
                         onTouchEnd={handleTouchEnd}>
-                        {selectedImage && (
-                        <img
-                            key={selectedIndex}
-                            className="product-main-image"
-                            src={urlFor(selectedImage).width(900).url()}
-                            alt={product.name}
-                            onClick={() => setIsZoomOpen(true)}
-                        />
-                        )}
+                        <div
+                            className="main-image-track"
+                            style={{
+                                transform: `translateX(-${selectedIndex * 100}%)`
+                            }}
+                            >
+                            {product.images?.map((image, index) => (
+                                <img
+                                key={index}
+                                className="product-main-image"
+                                src={urlFor(image).width(900).url()}
+                                alt={`${product.name} ${index + 1}`}
+                                onClick={() => {
+                                    setSelectedImage(image)
+                                    setIsZoomOpen(true)
+                                }}
+                                />
+                            ))}
+                        </div>
                         <button className="image-arrow left" onClick={showPrevImage}>
                             ‹
                         </button>
