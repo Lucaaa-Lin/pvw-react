@@ -4,7 +4,7 @@ import about2 from '../assets/about2.jpg'
 function About() {
   return (
     <main className="about-page">
-      <div className='page-container'>
+      <div className='page-container-about'>
         <section className="about-intro">
           <div className="about-text">
             <h1 className='mobile-about'>About us</h1>

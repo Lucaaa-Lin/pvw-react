@@ -45,6 +45,13 @@ a {
   padding-left: 24px;
   padding-right: 24px;
 }
+.page-container-about {
+  width: 100%;
+  max-width: 880px;
+  margin: 0 auto;
+  padding-left: 24px;
+  padding-right: 24px;
+}
 
 .header {
   position: sticky;
@@ -215,6 +222,7 @@ a {
 .mobile-menu-overlay {
   display: none;
 }
+
 
 /* ----------- footer---------- */
 .footer {
