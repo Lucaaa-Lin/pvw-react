@@ -733,7 +733,7 @@ a {
   padding: 3px;
   font-size: 14px;
   text-align: center;
-  min-height: 130px;
+  min-height: 140px;
   display: flex;
   flex-direction: column;
 }
