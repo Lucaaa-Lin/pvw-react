@@ -43,13 +43,7 @@ function ProductDetail() {
     fetchProduct()
   }, [slug])
 
-  if (!product) {
-    return (
-      <main>
-        <p>Loading product...</p>
-      </main>
-    )
-  }
+  if (!product) return null
   async function handleSubmit(e) {
     e.preventDefault()
 

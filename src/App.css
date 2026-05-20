@@ -1134,13 +1134,19 @@ a {
     transform: translateX(0);
   }
 }
+main {
+  flex: 1;
+  animation: pageFadeIn 0.25s ease;
+}
 
-/* @keyframes fadeIn {
+@keyframes pageFadeIn {
   from {
     opacity: 0;
+    transform: translateY(8px);
   }
 
   to {
     opacity: 1;
+    transform: translateY(0);
   }
-} */
+}
