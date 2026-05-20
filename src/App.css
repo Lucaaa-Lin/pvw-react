@@ -552,6 +552,12 @@ a {
     height: 45px;
     width: 100%;
     flex:1;
+    text-align: center;
+    text-align-last: center;
+    padding-left: 0;
+    padding-right: 0;
+    appearance: none;
+    -webkit-appearance: none;
   }
   .filter-dropdown,
   .sort-select {
