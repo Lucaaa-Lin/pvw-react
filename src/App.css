@@ -335,6 +335,9 @@ a {
   .blacklogo{
     margin-top: 30px;
   }
+  .productcard-info {
+  min-height: 140px !important;
+}
 }
 /* ----------- footer---------- */
 .footer {
@@ -733,7 +736,7 @@ a {
   padding: 3px;
   font-size: 14px;
   text-align: center;
-  min-height: 140px;
+  min-height: 120px;
   display: flex;
   flex-direction: column;
 }
@@ -790,7 +793,6 @@ a {
   margin-bottom: 40px;
   margin-top: 20px;
   padding: 14px 34px;
-
   color: black;
   background: white;
   border: 1px solid black;
