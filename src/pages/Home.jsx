@@ -7,7 +7,7 @@ function Home() {
   const [selectedBrands, setSelectedBrands] = useState([])
   const [selectedGenders, setSelectedGenders] = useState([])
   const [selectedMovements, setSelectedMovements] = useState([])
-  const [sortOption, setSortOption] = useState('newest')
+  const [sortOption, setSortOption] = useState('default')
   const [visibleCount, setVisibleCount] = useState(12)
   const [isFilterOpen, setIsFilterOpen] = useState(false)
   const filterRef = useRef(null)
@@ -163,8 +163,9 @@ function Home() {
               value={sortOption}
               onChange={(e) => setSortOption(e.target.value)}
             >
-            <option value="newest">Newest to Oldest</option>
-            <option value="oldest">Oldest to Newest</option>
+            <option value="default" disabled>Sort by</option>
+            <option value="newest">Time: Newest first</option>
+            <option value="oldest">Time: Oldest first</option>
             <option value="price-low">Price: Low to High</option>
             <option value="price-high">Price: High to Low</option>
           </select>
@@ -174,7 +175,8 @@ function Home() {
               className="filter-toggle-btn"
               onClick={() => setIsFilterOpen(!isFilterOpen)}
             >
-              Filter
+              <span className="filter-text">Filter</span>
+              <span className="filter-arrow">⌄</span>
             </button>
 
             {isFilterOpen && (

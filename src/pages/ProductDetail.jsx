@@ -133,28 +133,42 @@ function ProductDetail() {
             <div className="product-detail-layout">
             {/* 左边：图片区域 */}
                 <section className="product-detail-left">
-                    <div className="main-image-wrapper"
+                    <div
+                        className="main-image-wrapper"
                         onTouchStart={handleTouchStart}
-                        onTouchEnd={handleTouchEnd}>
+                        onTouchEnd={handleTouchEnd}
+                        >
+                        {/* Desktop：只显示当前图片 */}
+                        {selectedImage && (
+                            <img
+                            className="product-main-image desktop-main-image"
+                            src={urlFor(selectedImage).width(900).url()}
+                            alt={product.name}
+                            onClick={() => setIsZoomOpen(true)}
+                            />
+                        )}
+
+                        {/* Mobile：滑动图片组 */}
                         <div
-                            className="main-image-track"
+                            className="main-image-track mobile-main-track"
                             style={{
-                                transform: `translateX(-${selectedIndex * 100}%)`
+                            transform: `translateX(-${selectedIndex * 100}%)`,
                             }}
-                            >
+                        >
                             {product.images?.map((image, index) => (
-                                <img
+                            <img
                                 key={index}
                                 className="product-main-image"
                                 src={urlFor(image).width(900).url()}
                                 alt={`${product.name} ${index + 1}`}
                                 onClick={() => {
-                                    setSelectedImage(image)
-                                    setIsZoomOpen(true)
+                                setSelectedImage(image)
+                                setIsZoomOpen(true)
                                 }}
-                                />
+                            />
                             ))}
                         </div>
+
                         <button className="image-arrow left" onClick={showPrevImage}>
                             ‹
                         </button>
@@ -162,7 +176,7 @@ function ProductDetail() {
                         <button className="image-arrow right" onClick={showNextImage}>
                             ›
                         </button>
-                    </div>
+                        </div>
 
                     <div className="product-gallery">
                     {product.images?.map((image, index) => (
@@ -189,8 +203,8 @@ function ProductDetail() {
                 {/* 右边：文字区域 */}
                 <section className="product-detail-right">
                     <div className="product-title-group">
-                        <h1>{product.brand}</h1>
-                        <h2>{product.name}</h2>
+                        <p className='productbrand'>{product.brand}</p>
+                        <p className='productname'>{product.name}</p>
                     </div>
 
                     <div className="product-price">
@@ -205,13 +219,20 @@ function ProductDetail() {
                     Message to Purchase
                     </button>
 
-                    <h3>Description</h3>
-                    <p className="product-description">{product.description}</p>
+                    <p className='Desription-title'>Description</p>
+                    <div className="product-description">
+                        {product.description
+                            ?.split('\n')
+                            .filter((line) => line.trim() !== '')
+                            .map((line, index) => (
+                            <p key={index}>{line}</p>
+                            ))}
+                    </div>
 
-                    <h3>Delivery</h3>
+                    <p className='Desription-title'>Delivery</p>
                     <p className="product-description">We ship worldwide via Australia Post with parcel tracking.</p>
 
-                    <h3>Payment</h3>
+                    <p className='Desription-title'>Payment</p>
                     <p className="product-description">We accept payment by bank transfer or cash on collection from Granville, NSW.</p>
                 </section>
 
