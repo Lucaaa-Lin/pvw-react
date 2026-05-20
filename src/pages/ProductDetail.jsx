@@ -258,16 +258,21 @@ function ProductDetail() {
                 <form onSubmit={handleSubmit}>
                     <label>Subject</label>
                     <input
-                    type="text"
-                    name="subject"
-                    value={`Inquiry - ${product.brand} ${product.name}`}
-                    readOnly
+                    type="hidden"
+                    name="type"
+                    value={`${product.brand} ${product.name}`}
                     />
 
                     <input
                     type="hidden"
-                    name="type"
-                    value={`${product.brand} ${product.name}`}
+                    name="price"
+                    value={`$${product.price?.toLocaleString()} AUD`}
+                    />
+
+                    <input
+                    type="hidden"
+                    name="productUrl"
+                    value={window.location.href}
                     />
 
                     <label>Name</label>
