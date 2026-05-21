@@ -739,10 +739,6 @@ a {
     width: 100%;
   }
   /* --主图放大切换-- */
-  .zoom-image {
-    max-width: 96vw;
-    max-height: 82vh;
-  }
   .zoom-arrow {
     width: 44px;
     height: 44px;
@@ -755,6 +751,24 @@ a {
 
   .zoom-right {
     right: 14px;
+  }
+  .zoom-overlay {
+    touch-action: pan-y;
+    overflow: hidden;
+  }
+
+  .zoom-track {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.35s ease;
+  }
+
+  .zoom-image {
+    flex: 0 0 100%;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
   }
   /* ----filter---- */
   .filter-dropdown {
@@ -1131,41 +1145,70 @@ a {
 .zoom-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.85);
+  background: rgba(0, 0, 0, 0.9); /* 稍深一点更有高级感 */
+  z-index: 9999;
+  overflow: hidden; /* 防止滑动时图片露出容器外 */
+  display: flex;
+  align-items: center;
+}
+
+/* 轮播轨道必须撑满全屏 */
+.zoom-track {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* 让滑动更灵敏丝滑 */
+}
+
+/* 新增：每一页幻灯片的容器，用来安全承载图片 */
+.zoom-slide {
+  flex: 0 0 100%;
+  width: 100%;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 9999;
+  padding: 0 60px; /* 留出左右两侧箭头的安全边距 */
 }
 
+/* 图片本身自适应，不允许超过屏幕且保持比例 */
 .zoom-image {
-  max-width: 90vw;
+  max-width: 100%;
   max-height: 90vh;
-
   object-fit: contain;
+  pointer-events: none; /* 防止手机端长按图片触发系统菜单干扰滑动 */
 }
 
+/* 按钮样式微调：提高层级，避免被轨道遮挡 */
 .zoom-arrow {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
   border: none;
-  background: rgba(255, 255, 255, 0.00);
-  color: white;
-  width: 52px;
-  height: 52px;
-  border-radius: 50%;
-  font-size: 42px;
-  line-height: 1;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.7);
+  width: 60px;
+  height: 60px;
+  font-size: 50px;
+  line-height: 50px;
   cursor: pointer;
+  z-index: 10000; /* 必须确保在 track 之上 */
+  transition: color 0.2s, background 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.zoom-arrow:hover {
+  color: white;
 }
 
 .zoom-left {
-  left: 28px;
+  left: 20px;
 }
 
 .zoom-right {
-  right: 28px;
+  right: 20px;
 }
 /* --- right intro---- */
 .product-detail-right {

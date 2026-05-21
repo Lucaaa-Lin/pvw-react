@@ -308,34 +308,53 @@ function ProductDetail() {
             {isZoomOpen && (
                 <div
                     className="zoom-overlay"
-                    onClick={() => setIsZoomOpen(false)}
+                    onClick={() => setIsZoomOpen(false)} /* 点击任何空白区域都会关闭 */
                     onTouchStart={handleTouchStart}
                     onTouchEnd={handleTouchEnd}
                 >
+                    {/* 1. 核心修改：去掉轨道的 e.stopPropagation()，让点击事件可以穿透出去 */}
+                    <div
+                    className="zoom-track"
+                    style={{
+                        transform: `translateX(-${selectedIndex * 100}%)`,
+                    }}
+                    >
+                    {product.images?.map((image, index) => (
+                        <div 
+                        className="zoom-slide" 
+                        key={index}
+                        /* 如果点击的是图片外的黑边空白区域，也会触发关闭 */
+                        onClick={() => setIsZoomOpen(false)} 
+                        >
+                        <img
+                            className="zoom-image"
+                            src={urlFor(image).width(1600).url()}
+                            alt={`${product.name} ${index + 1}`}
+                            /* 2. 核心修改：只有真正点到“图片本身”的时候，才阻止关闭 */
+                            onClick={(e) => e.stopPropagation()} 
+                        />
+                        </div>
+                    ))}
+                    </div>
+
+                    {/* 3. 左右箭头：保持阻止冒泡，点击它们只切换图片，不关闭 */}
                     <button
                     type="button"
                     className="zoom-arrow zoom-left"
                     onClick={(e) => {
-                        e.stopPropagation()
-                        showPrevImage()
+                        e.stopPropagation();
+                        showPrevImage();
                     }}
                     >
                     ‹
                     </button>
 
-                    <img
-                    className="zoom-image"
-                    src={urlFor(selectedImage).width(1600).url()}
-                    alt={product.name}
-                    onClick={(e) => e.stopPropagation()}
-                    />
-
                     <button
                     type="button"
                     className="zoom-arrow zoom-right"
                     onClick={(e) => {
-                        e.stopPropagation()
-                        showNextImage()
+                        e.stopPropagation();
+                        showNextImage();
                     }}
                     >
                     ›
