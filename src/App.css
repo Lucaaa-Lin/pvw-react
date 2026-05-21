@@ -739,6 +739,10 @@ a {
     width: 100%;
   }
   /* --主图放大切换-- */
+  .zoom-image {
+    max-width: 96vw;
+    max-height: 82vh;
+  }
   .zoom-arrow {
     width: 44px;
     height: 44px;
