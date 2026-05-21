@@ -309,6 +309,8 @@ function ProductDetail() {
                 <div
                     className="zoom-overlay"
                     onClick={() => setIsZoomOpen(false)}
+                    onTouchStart={handleTouchStart}
+                    onTouchEnd={handleTouchEnd}
                 >
                     <button
                     type="button"
