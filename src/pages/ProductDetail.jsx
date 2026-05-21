@@ -257,6 +257,10 @@ function ProductDetail() {
 
                 <form onSubmit={handleSubmit}>
                     <label>Subject</label>
+                    <div className="subject-display">
+                    {product.brand} {product.name}
+                    </div>
+
                     <input
                     type="hidden"
                     name="type"
