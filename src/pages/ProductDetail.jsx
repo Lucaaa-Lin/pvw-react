@@ -306,16 +306,39 @@ function ProductDetail() {
             </div>
             )}
             {isZoomOpen && (
-            <div
-                className="zoom-overlay"
-                onClick={() => setIsZoomOpen(false)}
-            >
-                <img
-                className="zoom-image"
-                src={urlFor(selectedImage).width(1600).url()}
-                alt={product.name}
-                />
-            </div>
+                <div
+                    className="zoom-overlay"
+                    onClick={() => setIsZoomOpen(false)}
+                >
+                    <button
+                    type="button"
+                    className="zoom-arrow zoom-left"
+                    onClick={(e) => {
+                        e.stopPropagation()
+                        showPrevImage()
+                    }}
+                    >
+                    ‹
+                    </button>
+
+                    <img
+                    className="zoom-image"
+                    src={urlFor(selectedImage).width(1600).url()}
+                    alt={product.name}
+                    onClick={(e) => e.stopPropagation()}
+                    />
+
+                    <button
+                    type="button"
+                    className="zoom-arrow zoom-right"
+                    onClick={(e) => {
+                        e.stopPropagation()
+                        showNextImage()
+                    }}
+                    >
+                    ›
+                    </button>
+                </div>
             )}
         </div>
     </main>

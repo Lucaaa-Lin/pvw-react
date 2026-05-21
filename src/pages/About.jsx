@@ -7,7 +7,7 @@ function About() {
       <div className='page-container-about'>
         <section className="about-intro">
           <div className="about-text">
-            <h1 className='mobile-about'>About us</h1>
+            <p className='mobile-about'>About us</p>
             <div className='about-intro-top'>
               <div className='intro-top-left'>
                 <p>

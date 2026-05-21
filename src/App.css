@@ -716,7 +716,6 @@ a {
   }
   .main-image-track {
     display: flex;
-
     transition: transform 0.35s ease;
   }
 
@@ -738,6 +737,20 @@ a {
   }
   .purchase-btn{
     width: 100%;
+  }
+  /* --主图放大切换-- */
+  .zoom-arrow {
+    width: 44px;
+    height: 44px;
+    font-size: 36px;
+  }
+
+  .zoom-left {
+    left: 14px;
+  }
+
+  .zoom-right {
+    right: 14px;
   }
   /* ----filter---- */
   .filter-dropdown {
@@ -921,11 +934,12 @@ a {
   text-align: left;
 }
 
-.about-text h1 {
-  font-family: 'EB Garamond', serif;
-  font-size: 30px;
-  margin-bottom: 48px;
-  color: #111 !important;
+.mobile-about {
+  font-family: 'EB Garamond';
+  font-size: 24px;
+  font-weight: 500;
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
 
 .about-intro-top {
@@ -1108,6 +1122,46 @@ a {
   margin-bottom: 10px;
   font-size: 20px;
   font-weight: 500;
+}
+/* --主图放大左右切换-- */
+.zoom-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.zoom-image {
+  max-width: 90vw;
+  max-height: 90vh;
+
+  object-fit: contain;
+}
+
+.zoom-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: rgba(255, 255, 255, 0.00);
+  color: white;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  font-size: 42px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.zoom-left {
+  left: 28px;
+}
+
+.zoom-right {
+  right: 28px;
 }
 /* --- right intro---- */
 .product-detail-right {
