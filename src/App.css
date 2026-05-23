@@ -728,6 +728,15 @@ a {
     transform: scale(1.02);
     transform: none !important;
   }
+  .image-arrow:hover {
+    background: transparent;
+  }
+  .image-arrow {
+    -webkit-tap-highlight-color: transparent;
+  }
+  .image-arrow:active {
+    background: transparent;
+  }
   .main-image-wrapper {
     position: relative;
     overflow: hidden;
@@ -753,7 +762,6 @@ a {
     object-fit: contain;          /* 保持比例不换形，但会尽全力撑满极限边框 */
   }
 
-  /* 3. 优化修改：因为图片变大了，把左右切换箭头变得稍微半透明一点，防止太挡手表图 */
   .zoom-arrow {
     width: 44px;
     height: 44px;

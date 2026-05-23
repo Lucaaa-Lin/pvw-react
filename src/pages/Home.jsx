@@ -11,6 +11,7 @@ function Home() {
   const [visibleCount, setVisibleCount] = useState(12)
   const [isFilterOpen, setIsFilterOpen] = useState(false)
   const filterRef = useRef(null)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     async function fetchProducts() {
@@ -28,8 +29,10 @@ function Home() {
         description
       }`
 
+      setLoading(true)
       const data = await client.fetch(query)
       setProducts(data)
+      setLoading(false)
     }
 
     fetchProducts()
@@ -99,6 +102,7 @@ function Home() {
     'Rolex',
     'Seiko',
     'Sinn',
+    'Tudor',
     'Others',
   ]
 
@@ -277,7 +281,7 @@ function Home() {
         
         </div>
 
-          {filteredProducts.length === 0 ? (
+          {loading ? null : filteredProducts.length === 0 ? (
             <div className="empty-wrapper">
               <div className="empty-state">
                 <h2>No watches found</h2>
