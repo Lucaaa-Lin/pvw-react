@@ -54,37 +54,39 @@ function SearchPage() {
         })
 
   return (
-    <main className="search-page">
-        <div className="search-back-row">
-            <Link to="/" className="back-link">
-                ← Back to all watches
-            </Link>
+    <main className="home-page">
+        <div className="page-container">
+            <div className="search-back-row">
+                <Link to="/" className="back-link">
+                    ← Back to all watches
+                </Link>
+            </div>
+
+            {filteredProducts.length === 0 ? (
+
+                <div className="empty-wrapper">
+                <div className="empty-state">
+                    <h2>No watches found</h2>
+
+                    <p>
+                    Try adjusting your search terms.
+                    </p>
+                </div>
+                </div>
+
+            ) : (
+
+                <div className="product-grid">
+                {filteredProducts.map((product) => (
+                    <ProductCard
+                    key={product._id}
+                    product={product}
+                    />
+                ))}
+                </div>
+
+            )}
         </div>
-
-        {filteredProducts.length === 0 ? (
-
-            <div className="empty-wrapper">
-            <div className="empty-state">
-                <h2>No watches found</h2>
-
-                <p>
-                Try adjusting your search terms.
-                </p>
-            </div>
-            </div>
-
-        ) : (
-
-            <div className="product-grid">
-            {filteredProducts.map((product) => (
-                <ProductCard
-                key={product._id}
-                product={product}
-                />
-            ))}
-            </div>
-
-        )}
     </main>
   )
 }
