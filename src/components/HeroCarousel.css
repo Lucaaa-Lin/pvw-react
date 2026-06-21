@@ -68,6 +68,8 @@
   font-family: Arial;
   position: relative;
   z-index: 6;
+  color: #111;
+  -webkit-appearance: none;
 }
 
 .hero-book-button:hover {
@@ -103,6 +105,8 @@
   background: transparent;
   font-size: 30px;
   cursor: pointer;
+  color: #111;
+  -webkit-appearance: none;
 }
 
 .appointment-modal h2 {
@@ -151,11 +155,5 @@
   .hero-book-button {
     padding: 11px 22px;
     font-size: 14px;
-    appearance: none !important;
-    -webkit-tap-highlight-color: transparent !important;
-  }
-  .appointment-close {
-    appearance: none !important;
-    -webkit-tap-highlight-color: transparent !important;
   }
 }
