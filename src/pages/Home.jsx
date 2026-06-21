@@ -1,17 +1,18 @@
-import { useEffect, useState, useRef } from 'react'
-import ProductCard from '../components/ProductCard'
-import { client } from '../lib/sanityClient'
+import { useEffect, useState, useRef } from "react";
+import ProductCard from "../components/ProductCard";
+import { client } from "../lib/sanityClient";
+import HeroCarousel from "../components/HeroCarousel";
 
 function Home() {
-  const [products, setProducts] = useState([])
-  const [selectedBrands, setSelectedBrands] = useState([])
-  const [selectedGenders, setSelectedGenders] = useState([])
-  const [selectedMovements, setSelectedMovements] = useState([])
-  const [sortOption, setSortOption] = useState('default')
-  const [visibleCount, setVisibleCount] = useState(12)
-  const [isFilterOpen, setIsFilterOpen] = useState(false)
-  const filterRef = useRef(null)
-  const [loading, setLoading] = useState(true)
+  const [products, setProducts] = useState([]);
+  const [selectedBrands, setSelectedBrands] = useState([]);
+  const [selectedGenders, setSelectedGenders] = useState([]);
+  const [selectedMovements, setSelectedMovements] = useState([]);
+  const [sortOption, setSortOption] = useState("default");
+  const [visibleCount, setVisibleCount] = useState(12);
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const filterRef = useRef(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchProducts() {
@@ -27,147 +28,128 @@ function Home() {
         movement,
         status,
         description
-      }`
+      }`;
 
-      setLoading(true)
-      const data = await client.fetch(query)
-      setProducts(data)
-      setLoading(false)
+      setLoading(true);
+      const data = await client.fetch(query);
+      setProducts(data);
+      setLoading(false);
     }
 
-    fetchProducts()
-  }, [])
+    fetchProducts();
+  }, []);
   useEffect(() => {
     function handleClickOutside(event) {
-
-        if (
-          filterRef.current &&
-          !filterRef.current.contains(event.target)
-        ) {
-          setIsFilterOpen(false)
-        }
-
+      if (filterRef.current && !filterRef.current.contains(event.target)) {
+        setIsFilterOpen(false);
       }
-
-      document.addEventListener(
-        'mousedown',
-        handleClickOutside
-      )
-
-      return () => {
-        document.removeEventListener(
-          'mousedown',
-          handleClickOutside
-        )
-      }
-
-    }, [])
-
-    function toggleFilter(value, selected, setSelected) {
-    if (selected.includes(value)) {
-      setSelected(selected.filter((item) => item !== value))
-    } else {
-      setSelected([...selected, value])
     }
 
-    setVisibleCount(12)
-    setIsFilterOpen(false)
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  function toggleFilter(value, selected, setSelected) {
+    if (selected.includes(value)) {
+      setSelected(selected.filter((item) => item !== value));
+    } else {
+      setSelected([...selected, value]);
+    }
+
+    setVisibleCount(12);
+    setIsFilterOpen(false);
   }
   useEffect(() => {
     if (isFilterOpen) {
-      document.body.style.overflow = 'hidden'
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = ''
+      document.body.style.overflow = "";
     }
 
     return () => {
-      document.body.style.overflow = ''
-    }
-  }, [isFilterOpen])
+      document.body.style.overflow = "";
+    };
+  }, [isFilterOpen]);
 
-
-
-  const genders = ["Men's", "Women's", 'Unisex']
+  const genders = ["Men's", "Women's", "Unisex"];
 
   const brands = [
-    'Bulova',
-    'Catier',
-    'Hamilton',
-    'IWC',
-    'Jaeger-LeCoultre',
-    'Junghans',
-    'Longines',
-    'Omega',
-    'Rado',
-    'Rolex',
-    'Seiko',
-    'Sinn',
-    'Tudor',
-    'Others',
-  ]
+    "Bulova",
+    "Catier",
+    "Hamilton",
+    "IWC",
+    "Jaeger-LeCoultre",
+    "Junghans",
+    "Longines",
+    "Omega",
+    "Rado",
+    "Rolex",
+    "Seiko",
+    "Sinn",
+    "Tudor",
+    "Others",
+  ];
 
   const movements = [
-    'Automatic',
-    'Manual Wind',
-    'Quartz',
-    'Tuning Fork',
-    'Pocket Watch',
-  ]
+    "Automatic",
+    "Manual Wind",
+    "Quartz",
+    "Tuning Fork",
+    "Pocket Watch",
+  ];
 
-  const mainBrands = brands.filter(
-      (brand) => brand !== 'Others')
+  const mainBrands = brands.filter((brand) => brand !== "Others");
 
   const filteredProducts = products
     .filter((product) => {
-      const isOtherBrand =
-        !mainBrands.includes(product.brand)
-      
+      const isOtherBrand = !mainBrands.includes(product.brand);
+
       const brandMatch =
         selectedBrands.length === 0 ||
-        selectedBrands.includes(product.brand) || (
-        selectedBrands.includes('Others') &&
-        isOtherBrand
-      )
+        selectedBrands.includes(product.brand) ||
+        (selectedBrands.includes("Others") && isOtherBrand);
 
       const genderMatch =
         selectedGenders.length === 0 ||
-        product.gender?.some((gender) =>
-          selectedGenders.includes(gender)
-        )
+        product.gender?.some((gender) => selectedGenders.includes(gender));
 
       const movementMatch =
         selectedMovements.length === 0 ||
-        selectedMovements.includes(product.movement)
+        selectedMovements.includes(product.movement);
 
-      return brandMatch && genderMatch && movementMatch
+      return brandMatch && genderMatch && movementMatch;
     })
     .sort((a, b) => {
-      if (sortOption === 'price-low') return a.price - b.price
-      if (sortOption === 'price-high') return b.price - a.price
-      if (sortOption === 'newest') {
-        return Date.parse(b._createdAt) - Date.parse(a._createdAt)
+      if (sortOption === "price-low") return a.price - b.price;
+      if (sortOption === "price-high") return b.price - a.price;
+      if (sortOption === "newest") {
+        return Date.parse(b._createdAt) - Date.parse(a._createdAt);
       }
 
-      if (sortOption === 'oldest') {
-        return Date.parse(a._createdAt) - Date.parse(b._createdAt)
+      if (sortOption === "oldest") {
+        return Date.parse(a._createdAt) - Date.parse(b._createdAt);
       }
 
-      return 0
-      
-    })
-
+      return 0;
+    });
 
   return (
-    <main className='home-page'>
-      <div className='page-container'>
+    <main className="home-page">
+      <HeroCarousel />
+      <div className="page-container">
         <p className="allwatches">All Watches</p>
         <div className="filter-bar">
           <select
-              className="sort-select"
-              value={sortOption}
-              onChange={(e) => setSortOption(e.target.value)}
-            >
-            <option value="default" disabled>Sort by</option>
+            className="sort-select"
+            value={sortOption}
+            onChange={(e) => setSortOption(e.target.value)}
+          >
+            <option value="default" disabled>
+              Sort by
+            </option>
             <option value="newest">Time: Newest first</option>
             <option value="oldest">Time: Oldest first</option>
             <option value="price-low">Price: Low to High</option>
@@ -210,7 +192,7 @@ function Home() {
                             toggleFilter(
                               gender,
                               selectedGenders,
-                              setSelectedGenders
+                              setSelectedGenders,
                             )
                           }
                         />
@@ -231,7 +213,7 @@ function Home() {
                             toggleFilter(
                               brand,
                               selectedBrands,
-                              setSelectedBrands
+                              setSelectedBrands,
                             )
                           }
                         />
@@ -252,7 +234,7 @@ function Home() {
                             toggleFilter(
                               movement,
                               selectedMovements,
-                              setSelectedMovements
+                              setSelectedMovements,
                             )
                           }
                         />
@@ -265,11 +247,11 @@ function Home() {
                     type="button"
                     className="clear-filter-btn"
                     onClick={() => {
-                      setSelectedBrands([])
-                      setSelectedGenders([])
-                      setSelectedMovements([])
-                      setVisibleCount(12)
-                      setIsFilterOpen(false)
+                      setSelectedBrands([]);
+                      setSelectedGenders([]);
+                      setSelectedMovements([]);
+                      setVisibleCount(12);
+                      setIsFilterOpen(false);
                     }}
                   >
                     Clear Filters
@@ -278,29 +260,22 @@ function Home() {
               </>
             )}
           </div>
-        
         </div>
 
-          {loading ? null : filteredProducts.length === 0 ? (
-            <div className="empty-wrapper">
-              <div className="empty-state">
-                <h2>No watches found</h2>
-                <p>Try adjusting your filters or search terms.</p>
-              </div>
+        {loading ? null : filteredProducts.length === 0 ? (
+          <div className="empty-wrapper">
+            <div className="empty-state">
+              <h2>No watches found</h2>
+              <p>Try adjusting your filters or search terms.</p>
             </div>
-          ) : (
-            <div className="product-grid">
-              {filteredProducts
-                .slice(0, visibleCount)
-                .map((product) => (
-                  <ProductCard
-                    key={product._id}
-                    product={product}
-                  />
-              ))}
-            </div>
-
-          )}
+          </div>
+        ) : (
+          <div className="product-grid">
+            {filteredProducts.slice(0, visibleCount).map((product) => (
+              <ProductCard key={product._id} product={product} />
+            ))}
+          </div>
+        )}
 
         {visibleCount < filteredProducts.length && (
           <button
@@ -312,7 +287,7 @@ function Home() {
         )}
       </div>
     </main>
-  )
+  );
 }
 
-export default Home
+export default Home;

@@ -7,13 +7,14 @@
 
 html,
 body,
-#root { /* React 的根节点 #root 必须也是 100% 宽 */
+#root {
+  /* React 的根节点 #root 必须也是 100% 宽 */
   width: 100%;
   min-height: 100vh;
 }
 
 body {
-  font-family: 'EB Garamond', sans-serif;
+  font-family: "EB Garamond", sans-serif;
   color: #111;
   background: #fff;
 }
@@ -27,7 +28,8 @@ body {
 }
 
 /* 3. 页面主体部分（Routes 切换区域）自动撑满剩余高度 */
-.site > main, main {
+.site > main,
+main {
   flex: 1;
   width: 100%; /* 确保主体外壳也是 100% 宽 */
 }
@@ -57,11 +59,11 @@ a {
   position: sticky;
   top: 0;
   z-index: 1000;
-  height: 120px;
+  height: 100px;
   width: 100%;
   background: #fdcf7e;
-  box-shadow: 0 1px 0 rgba(0,0,0,0.06);
-  padding: 50px 20px 20px;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06);
+  padding: 20px 20px 20px;
 }
 .header-inner {
   width: 100%;
@@ -72,18 +74,17 @@ a {
   align-items: center;
 }
 
-
 .nav-left {
   display: flex;
   justify-self: start;
   gap: 20px;
-  font-family: 'EB Garamond', serif;
+  font-family: "EB Garamond", serif;
   font-size: 20px;
   font-weight: 500;
   align-items: center;
 }
 .header-home:hover {
-  color:#777;
+  color: #777;
 }
 .header-about:hover {
   color: #777;
@@ -96,7 +97,7 @@ a {
 }
 
 /* ----social medial---- */
-.social-icons{
+.social-icons {
   display: flex;
   flex-direction: row;
   gap: 5px;
@@ -177,7 +178,9 @@ a {
   border: 1px solid transparent;
   border-radius: 999px;
   overflow: hidden;
-  transition: width 0.3s ease, border-color 0.3s ease;
+  transition:
+    width 0.3s ease,
+    border-color 0.3s ease;
 }
 
 .search-expand.open {
@@ -217,7 +220,6 @@ a {
   display: none;
 }
 
-
 /* ----------- footer---------- */
 .footer {
   background: #ffb31f;
@@ -238,7 +240,7 @@ a {
   width: 100%;
   display: flex;
   flex-direction: row;
-  justify-content:space-between ;
+  justify-content: space-between;
   align-items: center;
 }
 .footer-bottom {
@@ -247,11 +249,11 @@ a {
   margin-bottom: -30px;
 }
 
-.footer-social{
+.footer-social {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  gap:10px;
+  gap: 10px;
   margin-top: 5px;
 }
 .footer-topleft img {
@@ -274,8 +276,8 @@ a {
   align-items: flex-start;
   text-align: left;
 }
-.footercontacttext{
-  font-family: 'EB Garamond',serif;
+.footercontacttext {
+  font-family: "EB Garamond", serif;
   margin-bottom: 0px;
 }
 
@@ -307,7 +309,7 @@ a {
   background: white;
   font-size: 14px;
   cursor: pointer;
-  align-items:center;
+  align-items: center;
   text-align: center;
 }
 
@@ -317,11 +319,9 @@ a {
 
 .filter-arrow {
   position: relative;
-  left:30px;
+  left: 30px;
   top: -2px;
-
 }
-
 
 .sort-select:hover {
   color: white;
@@ -347,7 +347,6 @@ a {
   position: absolute;
   z-index: 10;
   line-height: 0.5px;
-  
 }
 .filter-close-btn {
   display: none;
@@ -393,7 +392,7 @@ a {
   font-size: 42px;
   margin-bottom: 16px;
 
-  font-family: 'EB Garamond', serif;
+  font-family: "EB Garamond", serif;
 }
 
 .empty-state p {
@@ -514,7 +513,7 @@ a {
   }
 
   .mobile-menu {
-    color:black;
+    color: black;
     position: fixed;
     top: 0;
     right: 0;
@@ -613,7 +612,7 @@ a {
     gap: 14px;
     margin-top: 12px;
   }
-  .blacklogo{
+  .blacklogo {
     margin-top: 30px;
   }
   .productcard-info {
@@ -643,12 +642,12 @@ a {
     overflow: hidden;
   }
 
-.product-price {
-  margin-top: auto;
-}
+  .product-price {
+    margin-top: auto;
+  }
   .filter-bar {
     display: flex;
-    gap:12px;
+    gap: 12px;
     justify-content: space-between;
     padding-top: 10px;
     margin-left: 0px;
@@ -658,7 +657,7 @@ a {
   .filter-toggle-btn {
     height: 45px;
     width: 100%;
-    flex:1;
+    flex: 1;
     text-align: center;
     text-align-last: center;
     padding-left: 0;
@@ -672,12 +671,12 @@ a {
   }
   /* ------about-------- */
   .about-page {
-  margin: 0 auto;
-  padding: 10px !important;
-}
+    margin: 0 auto;
+    padding: 10px !important;
+  }
   .about-intro-top {
     /* 强行打破 Grid 布局，变成普通的上下堆叠块级布局 */
-    display: block !important; 
+    display: block !important;
   }
   .about-intro {
     text-align: center;
@@ -693,9 +692,9 @@ a {
     max-width: 100% !important;
   }
   .about-wide-image {
-  width: 100%;
-  height: auto !important;
-  margin-bottom: 20px;
+    width: 100%;
+    height: auto !important;
+    margin-bottom: 20px;
   }
   .about-text {
     display: flex;
@@ -759,7 +758,7 @@ a {
   .product-detail-right {
     padding-right: 0px !important;
   }
-  .purchase-btn{
+  .purchase-btn {
     width: 100%;
   }
   /* --主图放大切换-- */
@@ -772,9 +771,9 @@ a {
     flex: 0 0 100%;
     width: 100%;
     height: 100%;
-    max-width: 100% !important;  /* 确保满宽 */
-    max-height: 98vh !important;  /* 从 90vh 提升到 98vh，几乎占满全屏高度 */
-    object-fit: contain;          /* 保持比例不换形，但会尽全力撑满极限边框 */
+    max-width: 100% !important; /* 确保满宽 */
+    max-height: 98vh !important; /* 从 90vh 提升到 98vh，几乎占满全屏高度 */
+    object-fit: contain; /* 保持比例不换形，但会尽全力撑满极限边框 */
   }
 
   .zoom-arrow {
@@ -849,7 +848,6 @@ a {
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
   }
-
 
   .filter-panel {
     z-index: 9999;
@@ -944,7 +942,6 @@ a {
   transform: scale(1.02);
 }
 
-
 .product-info p {
   font-size: 14px;
   line-height: 1.4;
@@ -971,7 +968,7 @@ a {
   border: 1px solid black;
   cursor: pointer;
 }
-.load-more-btn:hover{
+.load-more-btn:hover {
   background: black;
   color: white;
 }
@@ -987,7 +984,7 @@ a {
 }
 
 .mobile-about {
-  font-family: 'EB Garamond';
+  font-family: "EB Garamond";
   font-size: 24px;
   font-weight: 500;
   margin-top: 30px;
@@ -1002,7 +999,7 @@ a {
 }
 
 .intro-top-left p {
-  font-family: 'EB Garamond', serif;
+  font-family: "EB Garamond", serif;
   font-size: 16px;
   line-height: 1.75;
   margin-bottom: 40px;
@@ -1051,7 +1048,6 @@ a {
   align-items: start;
 }
 
-
 .product-main-image {
   width: 100%;
   aspect-ratio: 3 / 4;
@@ -1075,7 +1071,7 @@ a {
 .zoom-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.88);
+  background: rgba(0, 0, 0, 0.88);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1104,7 +1100,7 @@ a {
   height: 56px;
   border: none;
   border-radius: 50%;
-  background: rgba(255,255,255,0.00);
+  background: rgba(255, 255, 255, 0);
   color: white;
   font-size: 60px;
   display: flex;
@@ -1115,7 +1111,7 @@ a {
 }
 
 .image-arrow:hover {
-  background: rgba(255,255,255,0.4);
+  background: rgba(255, 255, 255, 0.4);
 }
 
 .image-arrow.left {
@@ -1151,7 +1147,7 @@ a {
 
   box-shadow:
     0 0 0 1px #111,
-    0 4px 12px rgba(0,0,0,0.15);
+    0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .gallery-button:hover {
@@ -1169,7 +1165,7 @@ a {
   font-size: 30px;
   font-weight: 500;
 }
-.productname{
+.productname {
   margin-top: 10px;
   margin-bottom: 10px;
   font-size: 20px;
@@ -1227,7 +1223,9 @@ a {
   line-height: 50px;
   cursor: pointer;
   z-index: 10000; /* 必须确保在 track 之上 */
-  transition: color 0.2s, background 0.2s;
+  transition:
+    color 0.2s,
+    background 0.2s;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1256,13 +1254,13 @@ a {
 
 .product-detail-right h1 {
   font-size: 32px;
-  font-family: 'EB Garamond';
+  font-family: "EB Garamond";
   margin-bottom: 24px;
 }
 
 .product-detail-right h2 {
   font-size: 20px;
-  font-family: 'EB Garamond';
+  font-family: "EB Garamond";
   margin-bottom: 24px;
 }
 
@@ -1274,13 +1272,13 @@ a {
 .purchase-btn {
   padding: 10px 34px;
   font-size: 16px;
-  font-family: 'EB Garamond';
-  color:#111;
+  font-family: "EB Garamond";
+  color: #111;
   background: white;
   border: 1px solid black;
   cursor: pointer;
 }
-.purchase-btn:hover{
+.purchase-btn:hover {
   background-color: black;
   color: #f2f2f2;
 }
@@ -1292,7 +1290,7 @@ a {
 
 .product-description {
   width: 100%;
-  font-size: 16px; 
+  font-size: 16px;
   font-weight: normal;
   line-height: 1.3;
 }
@@ -1301,9 +1299,8 @@ a {
   margin: 0 0 10px;
 }
 
-
 .Desription-title {
-  font-size:22px;
+  font-size: 22px;
   font-weight: 700;
   margin-top: 20px;
   margin-bottom: 20px;

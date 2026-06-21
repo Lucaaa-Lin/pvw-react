@@ -1,0 +1,155 @@
+.hero-carousel {
+  width: 100%;
+  /* max-width: 1440px; */
+  height: 640px;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-slide {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+
+.hero-slide.active {
+  opacity: 1;
+}
+
+.hero-content {
+  position: absolute;
+
+  left: 50%;
+  top: 45%;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+  text-align: center;
+  color: white;
+}
+.hero-location {
+  background-color: rgba(0, 0, 0, 0.45);
+  border-radius: 10px;
+  padding: 10px;
+}
+.Showroom {
+  font-size: 44px;
+  font-weight: 800;
+  white-space: nowrap;
+  margin: 10px;
+  font-family: "EB Garamond", serif;
+}
+.Showroom-address {
+  font-size: 20px;
+  font-weight: 800;
+  margin-bottom: 5px;
+  font-family: Arial;
+  font-weight: 200;
+}
+
+.hero-content h2 {
+  font-size: 36px;
+  margin-bottom: 18px;
+  font-family: "EB Garamond", serif;
+}
+
+.hero-book-button {
+  margin-top: 10px;
+  padding: 14px 32px;
+  background: white;
+  border: 1px solid #111;
+  font-size: 16px;
+  cursor: pointer;
+  font-family: Arial;
+  position: relative;
+  z-index: 6;
+}
+
+.hero-book-button:hover {
+  background: #111;
+  color: #fff;
+}
+
+.appointment-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 9999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.appointment-modal {
+  width: 90%;
+  max-width: 420px;
+  background: #fff;
+  padding: 36px;
+  position: relative;
+  text-align: center;
+}
+
+.appointment-close {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  border: none;
+  background: transparent;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.appointment-modal h2 {
+  margin-bottom: 12px;
+  font-family: "EB Garamond", serif;
+}
+
+.appointment-modal p {
+  margin-bottom: 24px;
+  line-height: 1.5;
+}
+
+.appointment-links {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.appointment-links a {
+  padding: 13px 20px;
+  border: 1px solid #111;
+  text-decoration: none;
+  color: #111;
+}
+
+.appointment-links a:hover {
+  background: #111;
+  color: #fff;
+}
+
+@media (max-width: 768px) {
+  .hero-carousel {
+    height: 460px;
+  }
+
+  .hero-content {
+    position: absolute;
+    left: 50%;
+    top: 45%;
+  }
+
+  .hero-content h2 {
+    font-size: 26px;
+  }
+
+  .hero-book-button {
+    padding: 11px 22px;
+    font-size: 14px;
+  }
+}
