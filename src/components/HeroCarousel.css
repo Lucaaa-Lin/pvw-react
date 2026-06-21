@@ -151,11 +151,11 @@
   .hero-book-button {
     padding: 11px 22px;
     font-size: 14px;
-    appearance: none;
-    -webkit-tap-highlight-color: transparent;
+    appearance: none !important;
+    -webkit-tap-highlight-color: transparent !important;
   }
   .appointment-close {
-    appearance: none;
-    -webkit-tap-highlight-color: transparent;
+    appearance: none !important;
+    -webkit-tap-highlight-color: transparent !important;
   }
 }
