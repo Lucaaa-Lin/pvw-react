@@ -95,6 +95,7 @@
   padding: 36px;
   position: relative;
   text-align: center;
+  color: #111;
 }
 
 .appointment-close {
@@ -112,6 +113,7 @@
 .appointment-modal h2 {
   margin-bottom: 12px;
   font-family: "EB Garamond", serif;
+  color: #111;
 }
 
 .appointment-modal p {

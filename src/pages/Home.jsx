@@ -78,7 +78,7 @@ function Home() {
 
   const brands = [
     "Bulova",
-    "Catier",
+    "Cartier",
     "Hamilton",
     "IWC",
     "Jaeger-LeCoultre",
