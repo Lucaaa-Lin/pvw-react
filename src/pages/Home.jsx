@@ -62,17 +62,6 @@ function Home() {
     setVisibleCount(12);
     setIsFilterOpen(false);
   }
-  useEffect(() => {
-    if (isFilterOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [isFilterOpen]);
 
   const genders = ["Men's", "Women's", "Unisex"];
 
