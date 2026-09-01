@@ -68,6 +68,7 @@ function Home() {
   const brands = [
     "Bulova",
     "Cartier",
+    "Citizen",
     "Hamilton",
     "IWC",
     "Jaeger-LeCoultre",
