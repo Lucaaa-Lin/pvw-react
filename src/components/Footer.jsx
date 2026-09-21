@@ -46,6 +46,9 @@ function Footer() {
                   <FaInstagram />
                 </a>
               </div>
+              <h4 className="footercontacttext">Showroom Hours</h4>
+              <p>Weekdays: By Appointment</p>
+              <p>Saturday: 10am - 6pm</p>
             </div>
           </div>
         </div>

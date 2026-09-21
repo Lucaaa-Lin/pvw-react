@@ -63,7 +63,8 @@ function HeroCarousel() {
 
             <h2>Book an Appointment</h2>
             <p>
-              Contact us to arrange a private viewing for our vintage watches.
+              Contact us to arrange a private viewing of our vintage watches or
+              visit our showroom on Saturdays 10am-6pm.
             </p>
 
             <div className="appointment-links">
