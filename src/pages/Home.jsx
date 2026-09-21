@@ -5,15 +5,35 @@ import HeroCarousel from "../components/HeroCarousel";
 
 function Home() {
   const [products, setProducts] = useState([]);
-  const [selectedBrands, setSelectedBrands] = useState([]);
-  const [selectedGenders, setSelectedGenders] = useState([]);
-  const [selectedMovements, setSelectedMovements] = useState([]);
-  const [sortOption, setSortOption] = useState("default");
-  const [visibleCount, setVisibleCount] = useState(12);
+
+  // Restore filters from sessionStorage
+  const [selectedBrands, setSelectedBrands] = useState(() => {
+    return JSON.parse(sessionStorage.getItem("pvwSelectedBrands")) || [];
+  });
+
+  const [selectedGenders, setSelectedGenders] = useState(() => {
+    return JSON.parse(sessionStorage.getItem("pvwSelectedGenders")) || [];
+  });
+
+  const [selectedMovements, setSelectedMovements] = useState(() => {
+    return JSON.parse(sessionStorage.getItem("pvwSelectedMovements")) || [];
+  });
+
+  // Restore sort option
+  const [sortOption, setSortOption] = useState(() => {
+    return sessionStorage.getItem("pvwSortOption") || "default";
+  });
+
+  // Restore Load More count
+  const [visibleCount, setVisibleCount] = useState(() => {
+    return Number(sessionStorage.getItem("pvwVisibleCount")) || 12;
+  });
+
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const filterRef = useRef(null);
   const [loading, setLoading] = useState(true);
 
+  // Fetch products from Sanity
   useEffect(() => {
     async function fetchProducts() {
       const query = `*[_type == "product"]| order(_createdAt desc) {
@@ -31,13 +51,68 @@ function Home() {
       }`;
 
       setLoading(true);
+
       const data = await client.fetch(query);
+
       setProducts(data);
       setLoading(false);
     }
 
     fetchProducts();
   }, []);
+
+  // Save filter / sort / visible count state
+  useEffect(() => {
+    sessionStorage.setItem("pvwSelectedBrands", JSON.stringify(selectedBrands));
+
+    sessionStorage.setItem(
+      "pvwSelectedGenders",
+      JSON.stringify(selectedGenders),
+    );
+
+    sessionStorage.setItem(
+      "pvwSelectedMovements",
+      JSON.stringify(selectedMovements),
+    );
+
+    sessionStorage.setItem("pvwSortOption", sortOption);
+
+    sessionStorage.setItem("pvwVisibleCount", visibleCount.toString());
+  }, [
+    selectedBrands,
+    selectedGenders,
+    selectedMovements,
+    sortOption,
+    visibleCount,
+  ]);
+
+  // Save scroll position
+  useEffect(() => {
+    const handleScroll = () => {
+      sessionStorage.setItem("pvwScrollY", window.scrollY.toString());
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  // Restore scroll position after products finish loading
+  useEffect(() => {
+    if (!loading) {
+      const savedScrollY = sessionStorage.getItem("pvwScrollY");
+
+      if (savedScrollY) {
+        setTimeout(() => {
+          window.scrollTo(0, Number(savedScrollY));
+        }, 100);
+      }
+    }
+  }, [loading]);
+
+  // Close filter when clicking outside
   useEffect(() => {
     function handleClickOutside(event) {
       if (filterRef.current && !filterRef.current.contains(event.target)) {
@@ -113,8 +188,14 @@ function Home() {
       return brandMatch && genderMatch && movementMatch;
     })
     .sort((a, b) => {
-      if (sortOption === "price-low") return a.price - b.price;
-      if (sortOption === "price-high") return b.price - a.price;
+      if (sortOption === "price-low") {
+        return a.price - b.price;
+      }
+
+      if (sortOption === "price-high") {
+        return b.price - a.price;
+      }
+
       if (sortOption === "newest") {
         return Date.parse(b._createdAt) - Date.parse(a._createdAt);
       }
@@ -129,8 +210,10 @@ function Home() {
   return (
     <main className="home-page">
       <HeroCarousel />
+
       <div className="page-container">
         <p className="allwatches">All Watches</p>
+
         <div className="filter-bar">
           <select
             className="sort-select"
@@ -140,11 +223,16 @@ function Home() {
             <option value="default" disabled>
               Sort by
             </option>
+
             <option value="newest">Time: Newest first</option>
+
             <option value="oldest">Time: Oldest first</option>
+
             <option value="price-low">Price: Low to High</option>
+
             <option value="price-high">Price: High to Low</option>
           </select>
+
           <div className="filter-dropdown" ref={filterRef}>
             <button
               type="button"
@@ -152,6 +240,7 @@ function Home() {
               onClick={() => setIsFilterOpen(!isFilterOpen)}
             >
               <span className="filter-text">Filter</span>
+
               <span className="filter-arrow">⌄</span>
             </button>
 
@@ -170,6 +259,8 @@ function Home() {
                   >
                     ×
                   </button>
+
+                  {/* Gender */}
                   <div className="filter-column">
                     <h3>Gender</h3>
 
@@ -186,11 +277,13 @@ function Home() {
                             )
                           }
                         />
+
                         {gender}
                       </label>
                     ))}
                   </div>
 
+                  {/* Brand */}
                   <div className="filter-column">
                     <h3>Brand</h3>
 
@@ -207,11 +300,13 @@ function Home() {
                             )
                           }
                         />
+
                         {brand}
                       </label>
                     ))}
                   </div>
 
+                  {/* Movement */}
                   <div className="filter-column">
                     <h3>Movement</h3>
 
@@ -228,6 +323,7 @@ function Home() {
                             )
                           }
                         />
+
                         {movement}
                       </label>
                     ))}
@@ -252,10 +348,12 @@ function Home() {
           </div>
         </div>
 
+        {/* Products */}
         {loading ? null : filteredProducts.length === 0 ? (
           <div className="empty-wrapper">
             <div className="empty-state">
               <h2>No watches found</h2>
+
               <p>Try adjusting your filters or search terms.</p>
             </div>
           </div>
@@ -267,6 +365,7 @@ function Home() {
           </div>
         )}
 
+        {/* Load More */}
         {visibleCount < filteredProducts.length && (
           <button
             className="load-more-btn"

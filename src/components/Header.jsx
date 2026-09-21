@@ -1,61 +1,77 @@
-import { useEffect, useRef, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import { FiSearch } from 'react-icons/fi'
-import { FaFacebookF, FaEbay, FaInstagram } from 'react-icons/fa'
-import logoImage from '../assets/textlogo.png'
-import blacklogo from '../assets/blacklogo.png'
+import { useEffect, useRef, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { FiSearch } from "react-icons/fi";
+import { FaFacebookF, FaEbay, FaInstagram } from "react-icons/fa";
+import logoImage from "../assets/textlogo.png";
+import blacklogo from "../assets/blacklogo.png";
 
 function Header() {
-  const [searchTerm, setSearchTerm] = useState('')
-  const [isSearchOpen, setIsSearchOpen] = useState(false)
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [searchTerm, setSearchTerm] = useState("");
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const searchRef = useRef(null)
-  const navigate = useNavigate()
+  const searchRef = useRef(null);
+  const navigate = useNavigate();
 
   const handleSearch = () => {
-    if (!searchTerm.trim()) return
+    if (!searchTerm.trim()) return;
 
-    navigate(`/search?q=${encodeURIComponent(searchTerm.trim())}`)
-    setSearchTerm('')
-    setIsSearchOpen(false)
-    setIsMenuOpen(false)
-  }
+    navigate(`/search?q=${encodeURIComponent(searchTerm.trim())}`);
+    setSearchTerm("");
+    setIsSearchOpen(false);
+    setIsMenuOpen(false);
+  };
+
+  // Reset Home page state when Home or Logo is clicked
+  const handleHomeClick = (e) => {
+    e.preventDefault();
+
+    sessionStorage.removeItem("pvwSelectedBrands");
+    sessionStorage.removeItem("pvwSelectedGenders");
+    sessionStorage.removeItem("pvwSelectedMovements");
+    sessionStorage.removeItem("pvwSortOption");
+    sessionStorage.removeItem("pvwVisibleCount");
+    sessionStorage.removeItem("pvwScrollY");
+
+    setIsMenuOpen(false);
+
+    window.location.href = "/";
+  };
 
   useEffect(() => {
     function handleClickOutside(event) {
-      if (
-        searchRef.current &&
-        !searchRef.current.contains(event.target)
-      ) {
-        setIsSearchOpen(false)
+      if (searchRef.current && !searchRef.current.contains(event.target)) {
+        setIsSearchOpen(false);
       }
     }
 
-    document.addEventListener('mousedown', handleClickOutside)
+    document.addEventListener("mousedown", handleClickOutside);
 
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside)
-    }
-  }, [])
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   useEffect(() => {
     if (isMenuOpen) {
-      document.body.style.overflow = 'hidden'
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = ''
+      document.body.style.overflow = "";
     }
 
     return () => {
-      document.body.style.overflow = ''
-    }
-  }, [isMenuOpen])
+      document.body.style.overflow = "";
+    };
+  }, [isMenuOpen]);
 
   return (
     <header className="header">
       <div className="header-inner">
         <nav className="nav-left">
           <div className="header-home">
-            <Link to="/">Home</Link>
+            <Link to="/" onClick={handleHomeClick}>
+              Home
+            </Link>
           </div>
 
           <div className="header-about">
@@ -63,25 +79,26 @@ function Header() {
           </div>
         </nav>
 
-        <Link to="/" className="logo">
+        <Link to="/" className="logo" onClick={handleHomeClick}>
           <img
             src={logoImage}
             alt="Precision Vintage Watches"
             className="logo-image"
           />
         </Link>
+
         <button
           type="button"
           className="mobile-menu-btn"
           onClick={() => setIsMenuOpen(true)}
-          >
-            ☰
+        >
+          ☰
         </button>
 
         <div className="nav-right">
           <div className="search-area">
             <div
-              className={`search-expand ${isSearchOpen ? 'open' : ''}`}
+              className={`search-expand ${isSearchOpen ? "open" : ""}`}
               ref={searchRef}
             >
               {isSearchOpen && (
@@ -91,7 +108,7 @@ function Header() {
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   onKeyDown={(e) => {
-                    if (e.key === 'Enter') handleSearch()
+                    if (e.key === "Enter") handleSearch();
                   }}
                   autoFocus
                 />
@@ -101,14 +118,14 @@ function Header() {
                 type="button"
                 onClick={() => {
                   if (!isSearchOpen) {
-                    setIsSearchOpen(true)
-                    return
+                    setIsSearchOpen(true);
+                    return;
                   }
 
                   if (searchTerm.trim()) {
-                    handleSearch()
+                    handleSearch();
                   } else {
-                    setIsSearchOpen(false)
+                    setIsSearchOpen(false);
                   }
                 }}
               >
@@ -152,10 +169,7 @@ function Header() {
             className="mobile-menu-overlay"
             onClick={() => setIsMenuOpen(false)}
           >
-            <div
-              className="mobile-menu"
-              onClick={(e) => e.stopPropagation()}
-            >
+            <div className="mobile-menu" onClick={(e) => e.stopPropagation()}>
               <button
                 type="button"
                 className="mobile-menu-close"
@@ -171,7 +185,7 @@ function Header() {
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   onKeyDown={(e) => {
-                    if (e.key === 'Enter') handleSearch()
+                    if (e.key === "Enter") handleSearch();
                   }}
                 />
 
@@ -179,16 +193,19 @@ function Header() {
                   <FiSearch size={20} />
                 </button>
               </div>
-              <div className='menu-text-btn'>
-                <Link to="/" onClick={() => setIsMenuOpen(false)}>
+
+              <div className="menu-text-btn">
+                <Link to="/" onClick={handleHomeClick}>
                   Home
                 </Link>
 
                 <Link to="/about" onClick={() => setIsMenuOpen(false)}>
                   About
                 </Link>
-                <div className='mobile-social-section'>
-                  <p className='mobile-follow'>Follow us:</p>
+
+                <div className="mobile-social-section">
+                  <p className="mobile-follow">Follow us:</p>
+
                   <div className="mobile-social">
                     <a
                       href="https://www.facebook.com/people/Precision-Vintage-Watches/61587545607793/#"
@@ -218,8 +235,8 @@ function Header() {
                     </a>
                   </div>
                 </div>
-                
               </div>
+
               <img
                 src={blacklogo}
                 alt="Precision Vintage Watches"
@@ -230,7 +247,7 @@ function Header() {
         )}
       </div>
     </header>
-  )
+  );
 }
 
-export default Header
+export default Header;
